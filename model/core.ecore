@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="core" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="core">
+  <eClassifiers xsi:type="ecore:EClass" name="Situation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generalization" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composition" upperBound="-1"
+        eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
+        eType="#//DependabilityAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Causality">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
+        eType="#//DependabilityAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Violates">
+    <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//Situation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelevantTo">
+    <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//Situation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partPath" upperBound="-1"
+        eType="#//ForeignDomainConcept/Part"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependabilityElement" eSuperTypes="#//Situation">
+    <eStructuralFeatures xsi:type="ecore:EReference" upperBound="-1" eType="#//ControllingAction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllingAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affects" upperBound="-1"
+        eType="#//DependabilityAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependabilityAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefines" eType="#//DependabilityAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeRelation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formula" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="2"
+        upperBound="-1"/>
+  </eClassifiers>
+  <eSubpackages name="ForeignDomainConcept">
+    <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="erdiagram" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="erdiagram">
+  <eSubpackages name="ForeignDomainConcept">
+    <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
+  </eSubpackages>
+  <eSubpackages name="core" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="core">
+    <eClassifiers xsi:type="ecore:EClass" name="Causality">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" upperBound="-1"
+          eType="#//core/DependabilityAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Violates">
+      <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RelevantTo">
+      <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="partPath" upperBound="-1"
+          eType="#//ForeignDomainConcept/Part"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ControllingAction">
+      <eStructuralFeatures xsi:type="ecore:EReference" lowerBound="1" eType="#//ForeignDomainConcept/Element"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="affects" upperBound="-1"
+          eType="#//core/DependabilityAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DependabilityAttribute">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="redefines" eType="#//core/DependabilityAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeRelation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="formula" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="2"
+          upperBound="-1"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="general" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="general">
+    <eClassifiers xsi:type="ecore:EClass" name="Any Situation" instanceTypeName="Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstrtactEvent" instanceTypeName="Situation"
+        abstract="true" eSuperTypes="#//general/Any%20Situation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" lowerBound="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractCause" instanceTypeName="Situation"
+        abstract="true" eSuperTypes="#//general/AbstrtactEvent">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrence" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitgationOccuraaences"
+          unique="false" upperBound="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Cause">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrence" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitgationOccuraaences"
+          unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DysfunctionalEvent" instanceTypeName="Situation"
+        abstract="true" eSuperTypes="#//general/AbstrtactEvent"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractFailureMode" instanceTypeName="FailureMode"
+        abstract="true" eSuperTypes="#//general/UndesiredState">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="detectability" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationDetectabilities"
+          unique="false" upperBound="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FailureMode" instanceTypeName="FailureMode"
+        abstract="true" eSuperTypes="#//general/AbstractFailureMode">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="detectability" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationDetectabilities"
+          unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractEffect" instanceTypeName="Situation"
+        abstract="true" eSuperTypes="#//general/DysfunctionalEvent">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationSeverities"
+          unique="false" upperBound="-1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Effect" instanceTypeName="Situation"
+        abstract="true" eSuperTypes="#//general/AbstractEffect">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationSeverities"
+          unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Activation" eSuperTypes="#//core/Causality">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fault" upperBound="-1"
+          eType="#//general/AbstractCause"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="error" upperBound="-1"
+          eType="#//general/DysfunctionalEvent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ErrorPropagation" eSuperTypes="#//core/Causality">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fromError" upperBound="-1"
+          eType="#//general/DysfunctionalEvent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toError" upperBound="-1"
+          eType="#//general/DysfunctionalEvent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ErrorRealization" eSuperTypes="#//core/Causality">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="error" upperBound="-1"
+          eType="#//general/DysfunctionalEvent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="failure" upperBound="-1"
+          eType="#//general/DysfunctionalEvent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UndesiredState" instanceTypeName="Situation"/>
+  </eSubpackages>
+</ecore:EPackage>
