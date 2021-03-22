@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="raaml" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="raaml">
+  <eClassifiers xsi:type="ecore:EClass" name="State"/>
   <eSubpackages name="ForeignDomainConcept">
     <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
@@ -35,6 +36,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="2"
           upperBound="-1"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ControllingMeasure"/>
   </eSubpackages>
   <eSubpackages name="general" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="general">
     <eClassifiers xsi:type="ecore:EClass" name="Any Situation" instanceTypeName="Situation"/>
@@ -112,5 +115,14 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UndesiredState" instanceTypeName="Situation"
         eSuperTypes="#//general/DysfunctionalEvent"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FailureMode" eSuperTypes="#//core/Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Error" eSuperTypes="#//core/Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Fault" eSuperTypes="#//core/Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Detection" eSuperTypes="#//core/ControllingMeasure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Prevention" eSuperTypes="#//core/ControllingMeasure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Mitigation" eSuperTypes="#//core/ControllingMeasure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Recommendation" eSuperTypes="#//core/ControllingMeasure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FailureState" eSuperTypes="#//State"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Undeveloped" eSuperTypes="#//ForeignDomainConcept/Element"/>
   </eSubpackages>
 </ecore:EPackage>
