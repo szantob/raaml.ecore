@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="raaml" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="raaml">
-  <eClassifiers xsi:type="ecore:EClass" name="State"/>
   <eSubpackages name="ForeignDomainConcept">
     <eClassifiers xsi:type="ecore:EClass" name="Part" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="State"/>
   </eSubpackages>
   <eSubpackages name="core" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="core">
     <eClassifiers xsi:type="ecore:EClass" name="Causality">
@@ -38,15 +38,13 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Situation"/>
     <eClassifiers xsi:type="ecore:EClass" name="ControllingMeasure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Any Situation"/>
   </eSubpackages>
   <eSubpackages name="general" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="general">
-    <eClassifiers xsi:type="ecore:EClass" name="Any Situation" instanceTypeName="Situation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstrtactEvent" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/Any%20Situation">
+    <eClassifiers xsi:type="ecore:EClass" name="AbstrtactEvent" abstract="true" eSuperTypes="#//core/Any%20Situation">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" lowerBound="1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstractCause" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/AbstrtactEvent">
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractCause" abstract="true" eSuperTypes="#//general/AbstrtactEvent">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurrence" lowerBound="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitgationOccuraaences"
           unique="false" upperBound="-1"/>
@@ -57,22 +55,20 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitgationOccuraaences"
           unique="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DysfunctionalEvent" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/AbstrtactEvent"/>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstractFailureMode" instanceTypeName="FailureMode"
-        abstract="true" eSuperTypes="#//general/UndesiredState">
+    <eClassifiers xsi:type="ecore:EClass" name="DysfunctionalEvent" abstract="true"
+        eSuperTypes="#//general/AbstrtactEvent"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractFailureMode" abstract="true"
+        eSuperTypes="#//general/UndesiredState">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="detectability" lowerBound="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationDetectabilities"
           unique="false" upperBound="-1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstractEffect" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/DysfunctionalEvent">
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractEffect" abstract="true" eSuperTypes="#//general/DysfunctionalEvent">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationSeverities"
           unique="false" upperBound="-1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Effect" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/AbstractEffect">
+    <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true" eSuperTypes="#//general/AbstractEffect">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="premitigationSeverities"
@@ -96,16 +92,12 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="failure" upperBound="-1"
           eType="#//general/DysfunctionalEvent"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="HarmPotential" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/Any%20Situation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Hazard" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/HarmPotential"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Scenario" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/Any%20Situation">
+    <eClassifiers xsi:type="ecore:EClass" name="HarmPotential" abstract="true" eSuperTypes="#//core/Any%20Situation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Hazard" abstract="true" eSuperTypes="#//general/HarmPotential"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Scenario" abstract="true" eSuperTypes="#//core/Any%20Situation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="scenarioStep" upperBound="-1"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AbstractRisk" instanceTypeName="Situation"
-        abstract="true" eSuperTypes="#//general/Scenario">
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractRisk" abstract="true" eSuperTypes="#//general/Scenario">
       <eStructuralFeatures xsi:type="ecore:EReference" name="harm" upperBound="-1"
           eType="#//general/AbstractEffect"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" upperBound="-1"
@@ -113,8 +105,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="harmPotential" upperBound="-1"
           eType="#//general/HarmPotential"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UndesiredState" instanceTypeName="Situation"
-        eSuperTypes="#//general/DysfunctionalEvent"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UndesiredState" eSuperTypes="#//general/DysfunctionalEvent"/>
     <eClassifiers xsi:type="ecore:EClass" name="FailureMode" eSuperTypes="#//core/Situation"/>
     <eClassifiers xsi:type="ecore:EClass" name="Error" eSuperTypes="#//core/Situation"/>
     <eClassifiers xsi:type="ecore:EClass" name="Fault" eSuperTypes="#//core/Situation"/>
@@ -122,7 +113,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Prevention" eSuperTypes="#//core/ControllingMeasure"/>
     <eClassifiers xsi:type="ecore:EClass" name="Mitigation" eSuperTypes="#//core/ControllingMeasure"/>
     <eClassifiers xsi:type="ecore:EClass" name="Recommendation" eSuperTypes="#//core/ControllingMeasure"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FailureState" eSuperTypes="#//State"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FailureState" eSuperTypes="#//ForeignDomainConcept/State"/>
     <eClassifiers xsi:type="ecore:EClass" name="Undeveloped" eSuperTypes="#//ForeignDomainConcept/Element"/>
   </eSubpackages>
 </ecore:EPackage>
