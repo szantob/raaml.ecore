@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="raaml" nsURI="hu.bme.mit.szantob.raaml" nsPrefix="raaml">
+  <eSubpackages name="External" nsPrefix="External">
+    <eClassifiers xsi:type="ecore:EClass" name="Element"/>
+  </eSubpackages>
+  <eSubpackages name="Entities" nsPrefix="Entities">
+    <eSubpackages name="Situation">
+      <eClassifiers xsi:type="ecore:EClass" name="Situation">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="general" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="part" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Error" eSuperTypes="#//Entities/Situation/Situation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Cause" eSuperTypes="#//Entities/Situation/Situation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="DysfunctionalEvent" eSuperTypes="#//Entities/Situation/Situation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Fault" eSuperTypes="#//Entities/Situation/Situation"/>
+      <eClassifiers xsi:type="ecore:EClass" name="FailureMode" eSuperTypes="#//Entities/Situation/Situation"/>
+    </eSubpackages>
+    <eSubpackages name="Scenario">
+      <eClassifiers xsi:type="ecore:EClass" name="Scenario" eSuperTypes="#//Entities/Situation/Situation">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="scenarioStep" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="AbstractRisk" eSuperTypes="#//Entities/Scenario/Scenario">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="score" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="harm" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="harmPotential" upperBound="-1"
+            eType="#//Entities/Situation/Situation"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="Relationships" nsPrefix="Relationships">
+    <eSubpackages name="Causality" nsPrefix="Causality">
+      <eClassifiers xsi:type="ecore:EClass" name="Causality">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+            eType="#//Entities/Situation/Situation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1"
+            eType="#//Entities/Situation/Situation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Entities/Situation/Situation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Activation" eSuperTypes="#//Relationships/Causality/Causality">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="fault"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="error"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ErrorPropagation" eSuperTypes="#//Relationships/Causality/Causality">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="toError" upperBound="-1"
+            eType="#//Entities/Situation/DysfunctionalEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="fromError" upperBound="-1"
+            eType="#//Entities/Situation/DysfunctionalEvent"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ErrorRealisation" eSuperTypes="#//Relationships/Causality/Causality">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="error" upperBound="-1"
+            eType="#//Entities/Situation/DysfunctionalEvent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="failure" upperBound="-1"
+            eType="#//Entities/Situation/DysfunctionalEvent"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>
